@@ -37,7 +37,7 @@ struct ContentView: View {
                     }
                     
                     // Button to navigate to another new view
-                    NavigationLink(destination: AddRentalView()) {
+                    NavigationLink(destination: DataEntryView()) {
                         RectangleButton(color: Color.green, title: "Add a Rental")
                     }
                 }
@@ -67,10 +67,10 @@ struct ContentView: View {
     }
     
     
-    struct AddRentalView: View {
-        var body: some View {
-            Text("This is the Add Rental view!")
-        }
-    }
+//    struct AddRentalView: View {
+//        var body: some View {
+//            Text("This is the Add Rental view!")
+//        }
+//    }
 }
 
