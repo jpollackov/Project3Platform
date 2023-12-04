@@ -47,7 +47,14 @@ struct ListOfItems: View {
         Item(name: "soccer ball", itemPrice: "5", renterName: "Christopher", renterPhoneNum: "2843887208", dormBuilding: "Sullivan", image: ""),
         Item(name: "spike ball net and ball", itemPrice: "14", renterName: "Nicole", renterPhoneNum: "5478976604", dormBuilding: "Kleck", image: ""),
         Item(name: "volley ball and portable net", itemPrice: "22", renterName: "Cassy", renterPhoneNum: "3459286030", dormBuilding: "Sheehan", image: ""),
-        Item(name: "frisbee", itemPrice: "6", renterName: "Lauren", renterPhoneNum: "3746587612", dormBuilding: "Sullivan", image: "")
+        Item(name: "frisbee", itemPrice: "6", renterName: "Lauren", renterPhoneNum: "3746587612", dormBuilding: "Sullivan", image: ""),
+        Item(name: "baseball", itemPrice: "5", renterName: "Sammy", renterPhoneNum: "6582894004", dormBuilding: "Sheehan", image: ""),
+        Item(name: "football", itemPrice: "9", renterName: "Lauretta", renterPhoneNum: "6582320197", dormBuilding: "Kleck", image: ""),
+        Item(name: "baseball bat and baseball", itemPrice: "12", renterName: "Johnny", renterPhoneNum: "4589260401", dormBuilding: "St. Clares", image: ""),
+        Item(name: "10 dodge balls", itemPrice: "15", renterName: "Jane", renterPhoneNum: "3047124223", dormBuilding: "St. Monica", image: ""),
+        Item(name: "mini/portable fussball table", itemPrice: "8", renterName: "Jane", renterPhoneNum: "3047124223", dormBuilding: "Austin", image: ""),
+        Item(name: "frisbee", itemPrice: "6", renterName: "Ryan", renterPhoneNum: "4759267543", dormBuilding: "Alumni", image: ""),
+        Item(name: "left handed golf clubs and golf ball", itemPrice: "16", renterName: "Ryan", renterPhoneNum: "4759267543", dormBuilding: "Alumni", image: "")
     ]
 
     var sublistLen = 5
