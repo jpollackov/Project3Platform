@@ -28,9 +28,7 @@ struct ItemRow: View {
     }
 }
 
-// Create three restaurants, then show them in a list.
-struct ListOfItems: View {
-    let items = [
+let items = [
         Item(name: "football", itemPrice: "9", renterName: "Alex", renterPhoneNum: "7638764438", dormBuilding: "Alumni", image: ""),
         Item(name: "bocce ball set", itemPrice: "12", renterName: "Anthony", renterPhoneNum: "2458608903", dormBuilding: "Corr", image: ""),
         Item(name: "badminton rackets and birdie", itemPrice: "10", renterName: "Linda", renterPhoneNum: "6082939012", dormBuilding: "Welsh", image: ""),
@@ -50,11 +48,39 @@ struct ListOfItems: View {
         Item(name: "frisbee", itemPrice: "6", renterName: "Lauren", renterPhoneNum: "3746587612", dormBuilding: "Sullivan", image: "")
     ]
 
+var sublistLen = 5
+sublist = Array(ListOfItems[0..<x])
+
+func updateSublist (
+        sublistLen = sublistLen + 3
+        sublist = Array(ListOfItems[0..<x])
+)
+
+// Create three restaurants, then show them in a list.
+struct ListOfItems: View {
+    
+    sublist
+    RectangleButton("Load More Items") {
+    updateSublist
+    }
 
     var body: some View {
         List(items) { item in
             ItemRow(item: item)
         }
+    }
+}
+
+struct RectangleButton: View {
+    var color: Color
+    var title: String
+    
+    var body: some View {
+        Text(title)
+            .foregroundColor(.black)
+            .padding()
+            .background(color)
+            .cornerRadius(10)
     }
 }
 
