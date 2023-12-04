@@ -22,41 +22,55 @@ struct ContentView: View {
                 Color.black.ignoresSafeArea()
                 
                 VStack(spacing: 20) {
-                    Image("logo")
+                    Image("Image")
                         .resizable()
                         .scaledToFit()
+                        //.frame(width: 200, height: 200)
                     Text("Welcome to: DormDash Sports Rentals")
                         .font(.title)
                         .multilineTextAlignment(.center)
                         .foregroundColor(Color(white: 90))
                     
                     // Button to navigate to a new view
-                    NavigationLink(destination: YourNewView()) {
-                        RectangleButton(color: Color.blue, title: "See Rentals")
+                    NavigationLink(destination: YourNewView(text: "This is the Rentals view!")) {
+                        RectangleButton(color: Color.blue, title: "See Rentals ")
+                    }
+                    
+                    // Button to navigate to another new view
+                    NavigationLink(destination: AddRentalView()) {
+                        RectangleButton(color: Color.green, title: "Add a Rental")
                     }
                 }
             }
         }
     }
-}
-
-struct RectangleButton: View {
-    var color: Color
-    var title: String
     
-    var body: some View {
-        Text(title)
-            .foregroundColor(.black)
-            .padding()
-            .background(color)
-            .cornerRadius(10)
+    struct RectangleButton: View {
+        var color: Color
+        var title: String
+        
+        var body: some View {
+            Text(title)
+                .foregroundColor(.black)
+                .padding()
+                .background(color)
+                .cornerRadius(10)
+        }
+    }
+    
+    struct YourNewView: View {
+        var text: String
+        
+        var body: some View {
+            Text(text)
+        }
+    }
+    
+    
+    struct AddRentalView: View {
+        var body: some View {
+            Text("This is the Add Rental view!")
+        }
     }
 }
-
-struct YourNewView: View {
-    var body: some View {
-        Text("This is the new view!") //put in file here
-    }
-}
-
 
