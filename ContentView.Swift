@@ -32,7 +32,7 @@ struct ContentView: View {
                         .foregroundColor(Color(white: 90))
                     
                     // Button to navigate to a new view
-                    NavigationLink(destination: YourNewView(text: "This is the Rentals view!")) {
+                    NavigationLink(destination: ListOfItems()) {
                         RectangleButton(color: Color.blue, title: "See Rentals ")
                     }
                     
