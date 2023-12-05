@@ -8,69 +8,65 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State private var monthlyIncome = 0.0
-    @State private var variableCosts = 0.0
-    @State private var fixedCosts = 0.0
-    @State private var variableremainingIncome = 0.0
-    @State private var taxAmount = 0.0
-    //@State private var v_expenses: [Expense] = []
-    // @State private var expenses: [Expense] = []
-    
+    @StateObject private var rentalsManager = RentalsManager()
+
     var body: some View {
         NavigationView {
             ZStack {
-                Color.black.ignoresSafeArea()
-                
+                Color.white.ignoresSafeArea()  // Change the background color to white
+
                 VStack(spacing: 20) {
                     Image("Image")
                         .resizable()
                         .scaledToFit()
-                        //.frame(width: 200, height: 200)
-                    Text("Welcome to: DormDash Sports Rentals")
+                    Text("DormDash Sports Rentals")
                         .font(.title)
                         .multilineTextAlignment(.center)
-                        .foregroundColor(Color(white: 90))
-                    
-                    // Button to navigate to a new view
-                    NavigationLink(destination: ListOfItems()) {
-                        RectangleButton(color: Color.blue, title: "See Rentals ")
+                        .foregroundColor(.black)  // Change the text color to black
+
+                    NavigationLink(destination: ListOfItems(rentalsManager: rentalsManager)) {
+                        RectangleButton(color: Color.blue, title: "View Listings")
                     }
-                    
-                    // Button to navigate to another new view
-                    NavigationLink(destination: DataEntryView()) {
-                        RectangleButton(color: Color.green, title: "Add a Rental")
+
+                    NavigationLink(destination: DataEntryView(addItem: { newItem in
+                        // Handle adding the new item to your data source or perform any necessary logic
+                    }, rentalsManager: rentalsManager)) {
+                        Text("Submit a Rental")
+                            .foregroundColor(.black)
+                            .padding()
+                            .background(Color.green)
+                            .cornerRadius(10)
                     }
                 }
             }
+            .environmentObject(rentalsManager) // Inject RentalsManager into the environment
         }
     }
-    
-    struct RectangleButton: View {
-        var color: Color
-        var title: String
-        
-        var body: some View {
-            Text(title)
-                .foregroundColor(.black)
-                .padding()
-                .background(color)
-                .cornerRadius(10)
-        }
+}
+
+struct RectangleButton: View {
+    var color: Color
+    var title: String
+
+    var body: some View {
+        Text(title)
+            .foregroundColor(.black)
+            .padding()
+            .background(color)
+            .cornerRadius(10)
     }
-    
-    struct YourNewView: View {
-        var text: String
-        
-        var body: some View {
-            Text(text)
-        }
+}
+
+struct ContentView_Previews: PreviewProvider {
+    static var previews: some View {
+        ContentView()
     }
-    
+}
     
 //    struct AddRentalView: View {
 //        var body: some View {
 //            Text("This is the Add Rental view!")
 //        }
 //    }
-}
+
 
