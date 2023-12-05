@@ -15,6 +15,9 @@ struct DataEntryView: View {
     @State private var Dorm = ""
     @State private var Image = ""
     
+    var addItem: (Item) -> Void
+    @Binding var items: [Item]
+    
     var body: some View {
         VStack(alignment: .leading, spacing: 20) {
             Text("Enter Information:")
@@ -43,12 +46,30 @@ struct DataEntryView: View {
             
             Spacer()
         }
-        .padding()
+        Button(action: {
+                      let newItem = Item(name: item, itemPrice: itemprice, renterName: rentorName, renterPhoneNum: phoneNumber, dormBuilding: Dorm, image: Image)
+                      addItem(newItem)
+                  }) {
+                      RectangleButton(color: Color.blue, title: "Confirm")
+                  }
+                  .padding()
+    }
+ }
+
+struct RectangleButton: View {
+    var color: Color
+    var title: String
+    
+    var body: some View {
+        Text(title)
+            .foregroundColor(.black)
+            .padding()
+            .background(color)
+            .cornerRadius(10)
     }
 }
-
 struct DataEntryView_Previews: PreviewProvider {
     static var previews: some View {
-        DataEntryView()
+        DataEntryView(addItem: { _ in }, items: .constant([]))
     }
 }
