@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 
-// A struct to store exactly one restaurant's data.
+// A struct to store exactly one item's data.
 struct Item: Identifiable {
     let id = UUID()
     let name: String
@@ -28,9 +28,10 @@ struct ItemRow: View {
     }
 }
 
-// Create three restaurants, then show them in a list.
+// Create three items, then show them in a list.
 struct ListOfItems: View {
-    let items = [
+    @ObservedObject var rentalsManager: RentalsManager
+    @State private var items = [
         Item(name: "football", itemPrice: "9", renterName: "Alex", renterPhoneNum: "7638764438", dormBuilding: "Alumni", image: ""),
         Item(name: "bocce ball set", itemPrice: "12", renterName: "Anthony", renterPhoneNum: "2458608903", dormBuilding: "Corr", image: ""),
         Item(name: "badminton rackets and birdie", itemPrice: "10", renterName: "Linda", renterPhoneNum: "6082939012", dormBuilding: "Welsh", image: ""),
@@ -47,28 +48,33 @@ struct ListOfItems: View {
         Item(name: "soccer ball", itemPrice: "5", renterName: "Christopher", renterPhoneNum: "2843887208", dormBuilding: "Sullivan", image: ""),
         Item(name: "spike ball net and ball", itemPrice: "14", renterName: "Nicole", renterPhoneNum: "5478976604", dormBuilding: "Kleck", image: ""),
         Item(name: "volley ball and portable net", itemPrice: "22", renterName: "Cassy", renterPhoneNum: "3459286030", dormBuilding: "Sheehan", image: ""),
-        Item(name: "frisbee", itemPrice: "6", renterName: "Lauren", renterPhoneNum: "3746587612", dormBuilding: "Sullivan", image: ""),
-        Item(name: "baseball", itemPrice: "5", renterName: "Sammy", renterPhoneNum: "6582894004", dormBuilding: "Sheehan", image: ""),
-        Item(name: "football", itemPrice: "9", renterName: "Lauretta", renterPhoneNum: "6582320197", dormBuilding: "Kleck", image: ""),
-        Item(name: "baseball bat and baseball", itemPrice: "12", renterName: "Johnny", renterPhoneNum: "4589260401", dormBuilding: "St. Clares", image: ""),
-        Item(name: "10 dodge balls", itemPrice: "15", renterName: "Jane", renterPhoneNum: "3047124223", dormBuilding: "St. Monica", image: ""),
-        Item(name: "mini/portable fussball table", itemPrice: "8", renterName: "Jane", renterPhoneNum: "3047124223", dormBuilding: "Austin", image: ""),
-        Item(name: "frisbee", itemPrice: "6", renterName: "Ryan", renterPhoneNum: "4759267543", dormBuilding: "Alumni", image: ""),
-        Item(name: "left handed golf clubs and golf ball", itemPrice: "16", renterName: "Ryan", renterPhoneNum: "4759267543", dormBuilding: "Alumni", image: "")
+        Item(name: "frisbee", itemPrice: "6", renterName: "Lauren", renterPhoneNum: "3746587612", dormBuilding: "Sullivan", image: "")
     ]
-
-    var sublistLen = 5
-    sublist = Array(ListOfItems[0..<x])
-
-    func updateSublist (
-        sublistLen = sublistLen + 3
-        sublist = Array(ListOfItems[0..<x])
-    )
     
-    var body: some View {
-        List(items) { item in
-            ItemRow(item: item)
-        }
-    }
-}
+    
+    @State private var showingDataEntryView = false
 
+       var body: some View {
+           NavigationView {
+               List(items) { item in
+                   ItemRow(item: item)
+               }
+               .navigationTitle("List of Items")
+               .navigationBarItems(trailing:
+                   Button(action: {
+                       showingDataEntryView.toggle()
+                   }) {
+                       Image(systemName: "plus.circle.fill")
+                           .font(.title)
+                           .foregroundColor(.green)
+                   }
+               )
+               .sheet(isPresented: $showingDataEntryView) {
+                   // Pass the addItem function, rentalsManager, and the items array as a binding to DataEntryView
+                   DataEntryView(addItem: { newItem in
+                       items.append(newItem)
+                   }, rentalsManager: rentalsManager)
+               }
+           }
+       }
+   }

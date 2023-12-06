@@ -8,68 +8,58 @@
 import SwiftUI
 
 struct DataEntryView: View {
-    @State private var item = ""
-    @State private var itemprice = ""
-    @State private var rentorName = ""
-    @State private var phoneNumber = ""
-    @State private var Dorm = ""
-    @State private var Image = ""
-    
     var addItem: (Item) -> Void
-    @Binding var items: [Item]
-    
+    @ObservedObject var rentalsManager: RentalsManager
+    @Environment(\.presentationMode) var presentationMode
+    @State private var item = ""
+    @State private var itemPrice = ""
+    @State private var renterName = ""
+    @State private var phoneNumber = ""
+    @State private var dorm = ""
+    @State private var image = ""
+
     var body: some View {
         VStack(alignment: .leading, spacing: 20) {
             Text("Enter Information:")
                 .font(.title)
                 .foregroundColor(.blue)
-            
+
             TextField("Item", text: $item)
                 .textFieldStyle(RoundedBorderTextFieldStyle())
-            
-            TextField("Price of Item", text: $itemprice)
+
+            TextField("Price of Item", text: $itemPrice)
                 .textFieldStyle(RoundedBorderTextFieldStyle())
-            
-            TextField("Full Name", text: $rentorName)
+
+            TextField("Full Name", text: $renterName)
                 .textFieldStyle(RoundedBorderTextFieldStyle())
-                .keyboardType(.emailAddress)
-            
+                .keyboardType(.default)
+
             TextField("Phone Number", text: $phoneNumber)
                 .textFieldStyle(RoundedBorderTextFieldStyle())
                 .keyboardType(.phonePad)
-            
-            TextField("Dorm", text: $Dorm)
-                .textFieldStyle(RoundedBorderTextFieldStyle())
-            
-            TextField("Image", text: $Image)
-                .textFieldStyle(RoundedBorderTextFieldStyle())
-            
-            Spacer()
-        }
-        Button(action: {
-                      let newItem = Item(name: item, itemPrice: itemprice, renterName: rentorName, renterPhoneNum: phoneNumber, dormBuilding: Dorm, image: Image)
-                      addItem(newItem)
-                  }) {
-                      RectangleButton(color: Color.blue, title: "Confirm")
-                  }
-                  .padding()
-    }
- }
 
-struct RectangleButton: View {
-    var color: Color
-    var title: String
-    
-    var body: some View {
-        Text(title)
-            .foregroundColor(.black)
+            TextField("Dorm", text: $dorm)
+                .textFieldStyle(RoundedBorderTextFieldStyle())
+
+            TextField("Image", text: $image)
+                .textFieldStyle(RoundedBorderTextFieldStyle())
+
+            Spacer()
+            Button(action: {
+                let newItem = Item(name: item, itemPrice: itemPrice, renterName: renterName, renterPhoneNum: phoneNumber, dormBuilding: dorm, image: image)
+                addItem(newItem)
+                presentationMode.wrappedValue.dismiss()
+            }) {
+                RectangleButton(color: Color.blue, title: "Confirm")
+            }
             .padding()
-            .background(color)
-            .cornerRadius(10)
+        }
+        .padding()
     }
 }
+
 struct DataEntryView_Previews: PreviewProvider {
     static var previews: some View {
-        DataEntryView(addItem: { _ in }, items: .constant([]))
+        DataEntryView(addItem: { _ in }, rentalsManager: RentalsManager())
     }
 }
