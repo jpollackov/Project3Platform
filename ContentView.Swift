@@ -8,12 +8,12 @@
 import SwiftUI
 
 struct ContentView: View {
-    @StateObject private var rentalsManager = RentalsManager()
+    @StateObject private var rentalList = RentalList()
 
     var body: some View {
         NavigationView {
             ZStack {
-                Color.white.ignoresSafeArea()  // Change the background color to white
+                Color.black.ignoresSafeArea()
 
                 VStack(spacing: 20) {
                     Image("Image")
@@ -22,15 +22,14 @@ struct ContentView: View {
                     Text("DormDash Sports Rentals")
                         .font(.title)
                         .multilineTextAlignment(.center)
-                        .foregroundColor(.black)  // Change the text color to black
+                        .foregroundColor(.white)
 
-                    NavigationLink(destination: ListOfItems(rentalsManager: rentalsManager)) {
+                    NavigationLink(destination: ListOfItems(RentalObject: rentalList)) {
                         RectangleButton(color: Color.blue, title: "View Listings")
                     }
 
                     NavigationLink(destination: DataEntryView(addItem: { newItem in
-                        // Handle adding the new item to your data source or perform any necessary logic
-                    }, rentalsManager: rentalsManager)) {
+                    }, rentalObject: rentalList)) {
                         Text("Submit a Rental")
                             .foregroundColor(.black)
                             .padding()
@@ -39,7 +38,7 @@ struct ContentView: View {
                     }
                 }
             }
-            .environmentObject(rentalsManager) // Inject RentalsManager into the environment
+            .environmentObject(rentalList) 
         }
     }
 }
@@ -63,10 +62,4 @@ struct ContentView_Previews: PreviewProvider {
     }
 }
     
-//    struct AddRentalView: View {
-//        var body: some View {
-//            Text("This is the Add Rental view!")
-//        }
-//    }
-
 

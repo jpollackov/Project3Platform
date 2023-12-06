@@ -1,10 +1,24 @@
+//
+//  RentalList.swift
+//  Project 3
+//
+//  Created by Natalie Lawler on 12/6/23.
+//
+
 import Foundation
 import SwiftUI
 
-import SwiftUI
+struct Item: Identifiable {
+    let id = UUID()
+    let name: String
+    let itemPrice: String
+    let renterName: String
+    let renterPhoneNum: String
+    let dormBuilding: String
+}
 
-class RentalsObject: ObservableObject {
-    var RentalItems = [
+class RentalList: ObservableObject {
+    @Published var RentalItems = [
         Item(name: "football", itemPrice: "9", renterName: "Alex", renterPhoneNum: "7638764438", dormBuilding: "Alumni"),
         Item(name: "bocce ball set", itemPrice: "12", renterName: "Anthony", renterPhoneNum: "2458608903", dormBuilding: "Corr"),
         Item(name: "badminton rackets and birdie", itemPrice: "10", renterName: "Linda", renterPhoneNum: "6082939012", dormBuilding: "Welsh"),
@@ -24,7 +38,10 @@ class RentalsObject: ObservableObject {
         Item(name: "frisbee", itemPrice: "6", renterName: "Lauren", renterPhoneNum: "3746587612", dormBuilding: "Sullivan")
     ]
 
-    func AddListing(var_name: String, var_itemPrice: String, var_renterName: String, var_renterPhoneNum: String, var_dormBuilding: String) {
-        RentalItems.append([name: var_name, itemPrice: var_itemPrice, renterName: var_renterName, renterPhoneNum: var_renterPhoneNum, dormBuilding: var_dormBuilding])
+    func AddListing(name: String, itemPrice: String, renterName: String, renterPhoneNum: String, dormBuilding: String) {
+            let newItem = Item(name: name, itemPrice: itemPrice, renterName: renterName, renterPhoneNum: renterPhoneNum, dormBuilding: dormBuilding)
+            RentalItems.append(newItem)
+        }
+        
     }
-}
+
