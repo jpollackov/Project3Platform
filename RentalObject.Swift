@@ -3,7 +3,7 @@ import SwiftUI
 
 import SwiftUI
 
-class RentalsManager: ObservableObject {
+class RentalsObject: ObservableObject {
     var RentalItems = [
         Item(name: "football", itemPrice: "9", renterName: "Alex", renterPhoneNum: "7638764438", dormBuilding: "Alumni"),
         Item(name: "bocce ball set", itemPrice: "12", renterName: "Anthony", renterPhoneNum: "2458608903", dormBuilding: "Corr"),
