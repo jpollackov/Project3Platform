@@ -18,6 +18,10 @@ struct DataEntryView: View {
     @State private var dorm = ""
     @State private var image = ""
 
+    var isInputValid: Bool {
+        return !item.isEmpty && !itemPrice.isEmpty && !renterName.isEmpty && !phoneNumber.isEmpty && !dorm.isEmpty
+    }
+
     var body: some View {
         VStack(alignment: .leading, spacing: 20) {
             Text("Enter Information:")
@@ -45,7 +49,13 @@ struct DataEntryView: View {
                 .textFieldStyle(RoundedBorderTextFieldStyle())
 
             Spacer()
+
             Button(action: {
+                guard isInputValid else {
+                    // Show an alert or some indication that all fields must be filled
+                    return
+                }
+
                 let newItem = Item(name: item, itemPrice: itemPrice, renterName: renterName, renterPhoneNum: phoneNumber, dormBuilding: dorm, image: image)
                 addItem(newItem)
                 presentationMode.wrappedValue.dismiss()
@@ -53,13 +63,8 @@ struct DataEntryView: View {
                 RectangleButton(color: Color.blue, title: "Confirm")
             }
             .padding()
+            .disabled(!isInputValid) // Disable button if input is not valid
         }
         .padding()
-    }
-}
-
-struct DataEntryView_Previews: PreviewProvider {
-    static var previews: some View {
-        DataEntryView(addItem: { _ in }, rentalsManager: RentalsManager())
     }
 }
