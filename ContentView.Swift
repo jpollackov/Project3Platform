@@ -13,7 +13,7 @@ struct ContentView: View {
     var body: some View {
         NavigationView {
             ZStack {
-                Color.black.ignoresSafeArea()
+                Color.white.ignoresSafeArea()
 
                 VStack(spacing: 20) {
                     Image("Image")
@@ -22,7 +22,7 @@ struct ContentView: View {
                     Text("DormDash Sports Rentals")
                         .font(.title)
                         .multilineTextAlignment(.center)
-                        .foregroundColor(.white)
+                        .foregroundColor(.black)
 
                     NavigationLink(destination: ListOfItems(RentalObject: rentalList)) {
                         RectangleButton(color: Color.blue, title: "View Listings")
